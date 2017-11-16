@@ -29,7 +29,7 @@ export const exec = (
         })
     })
 
-export const parseToArray = (str:string): string[] =>
+export const parseToArray = (str: string): string[] =>
     str
         .split('\n')
         .filter(el => el !== '')
@@ -80,10 +80,9 @@ export const spawn = async (
     exe: string,
     ...args: string[]
 ): Promise<string[]> =>
-    await sp(cwd, false, exe, ...args)
-        .then(
-            res => res,
-            err => {
-                throw err
-            }
-        )
+    await sp(cwd, false, exe, ...args).then(
+        res => res,
+        err => {
+            throw err
+        }
+    )
