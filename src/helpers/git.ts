@@ -2,7 +2,7 @@ import * as shell from 'shelljs'
 import * as path from 'path'
 import * as util from 'util'
 
-import { spawn, output } from './'
+import { spawn, output, exec } from './'
 
 export const getGitFolder = (str: string): string => {
     let last = str.split('/').reverse()[0]
@@ -20,7 +20,7 @@ export const getGitFolder = (str: string): string => {
 export const parseRemoteLS = (arr: string[]): { hash: string; ref: string }[] =>
     arr.reduce((acc, val) => {
         let t = val.split('\t')
-        if (t[1] !== 'HEAD') {
+        if (t[1] !== 'HEAD' && t[1].indexOf('^{}') === -1) {
             acc.push({
                 hash: t[0],
                 ref: t[1]
@@ -33,9 +33,7 @@ export const gitGetTag = (pathToDir?) => (...args) =>
     spawn(pathToDir, 'git tag', ...args)
 
 export const getTags = async (pathToDir?) => {
-    let tags: any = await gitGetTag(pathToDir)()
-    tags = tags.split('\n').filter(e => e !== '')
-    return tags
+    return await gitGetTag(pathToDir)()
 }
 
 export const removeRemoteTag = (tag, pathToDir?) =>

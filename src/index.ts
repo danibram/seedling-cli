@@ -1,6 +1,6 @@
 import * as updateNotifier from 'update-notifier'
 
-import { infoCmd, upgradeCmd, initCmd } from './cmds'
+import { infoCmd, upgradeCmd, initCmd, tagCmd, tagsCmd } from './cmds'
 import { packageJson, createCLI } from './helpers'
 
 updateNotifier({ pkg: packageJson }).notify()
@@ -14,4 +14,6 @@ createCLI(process.cwd())
     .addCmd(infoCmd)
     .addCmd(initCmd)
     .addCmd(upgradeCmd)
+    .addCmd(tagsCmd)
+    .addCmd(tagCmd)
     .start()

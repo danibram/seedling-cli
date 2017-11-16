@@ -1,5 +1,6 @@
 import * as shell from 'shelljs'
 import { output, err } from './'
+import chalk from 'chalk'
 
 export const exec = (
     { cwd, verbose = false },
@@ -8,7 +9,7 @@ export const exec = (
     new Promise((resolve, reject) => {
         let cmd = `${args.join(' ')}`
 
-        verbose && output(`Exec: '${cmd}'`)
+        verbose && output(chalk.gray(`$ ${cmd}`))
 
         let child =
             cwd || cwd !== '.'
@@ -28,6 +29,12 @@ export const exec = (
         })
     })
 
+export const parseToArray = (str:string): string[] =>
+    str
+        .split('\n')
+        .filter(el => el !== '')
+        .map(el => el.trim())
+
 export const sp = (
     cwd: string | null = null,
     raw: boolean,
@@ -37,7 +44,8 @@ export const sp = (
     new Promise((resolve, reject) => {
         let cmd = args.length > 0 ? `${exe} ${args.join(' ')}` : `${exe}`
 
-        output(`Exec: '${cmd}'`)
+        output(`$ ${cmd}`)
+
         let child =
             cwd || cwd !== '.'
                 ? shell.cd(cwd).exec(cmd, { async: true, silent: true })
@@ -72,9 +80,10 @@ export const spawn = async (
     exe: string,
     ...args: string[]
 ): Promise<string[]> =>
-    await sp(cwd, false, exe, ...args).then(
-        res => res,
-        err => {
-            throw err
-        }
-    )
+    await sp(cwd, false, exe, ...args)
+        .then(
+            res => res,
+            err => {
+                throw err
+            }
+        )

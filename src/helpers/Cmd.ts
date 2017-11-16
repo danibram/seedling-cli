@@ -53,7 +53,7 @@ export class Cli {
 
         let msg = ''
         if (err.length > 0) {
-            msg = `Error ${chalk.red(err.join(' '))}`
+            msg = `${chalk.red(err.join(' '))}`
             this.error = msg
         } else {
             msg = `Complete`
