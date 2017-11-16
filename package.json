@@ -6,6 +6,7 @@
     "author": "danibram <info@dbr.io>",
     "homepage": "https://github.com/danibram/git-seed-project",
     "preferGlobal": true,
+    "files": ["build", "bin", "README.md"],
     "bin": {
         "seed": "./bin/gitseed.js",
         "seedcli": "./bin/gitseed.js"
