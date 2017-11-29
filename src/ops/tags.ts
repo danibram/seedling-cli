@@ -1,6 +1,7 @@
 import * as path from 'path'
 import * as remoteGitTags from 'remote-git-tags'
 import chalk from 'chalk'
+import semver from 'semver'
 
 import {
     readJSON,
@@ -26,6 +27,7 @@ export const tags = async function(CWD) {
         .split('\n')
         .filter(el => el !== '')
         .map(el => el.trim())
+        .sort((a,b)=> semver.compare(a,b))
         .forEach(tag => {
             console.log(`* [${chalk.green(tag)}]`)
         })
