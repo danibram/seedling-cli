@@ -1,6 +1,6 @@
 {
     "name": "seedling-cli",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Manage updates and creation using a seed",
     "main": "src/index.js",
     "author": "danibram <info@dbr.io>",
@@ -21,6 +21,7 @@
         "commander": "^2.11.0",
         "inquirer": "^3.3.0",
         "remote-git-tags": "^2.0.0",
+        "semver": "^5.4.1",
         "shelljs": "^0.7.8",
         "shortid": "^2.2.8",
         "tslib": "^1.8.0",
