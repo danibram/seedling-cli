@@ -170,6 +170,7 @@ export const upgrade = async function(CWD) {
         })
     )
 
+    console.log(`Updating .seedrc`)
     await writeJSON(
         path.join(CWD, config.FILE),
         Object.assign({}, file, {

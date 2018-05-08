@@ -1,16 +1,12 @@
 {
     "name": "seedling-cli",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Manage updates and creation using a seed",
     "main": "src/index.js",
     "author": "danibram <info@dbr.io>",
     "homepage": "https://github.com/danibram/git-seed-project",
     "preferGlobal": true,
-    "files": [
-        "build",
-        "bin",
-        "README.md"
-    ],
+    "files": ["build", "bin", "README.md"],
     "bin": {
         "seed": "./bin/gitseed.js",
         "seedcli": "./bin/gitseed.js"
@@ -51,16 +47,10 @@
         "html-coverage": "node_modules/.bin/nyc report --reporter=html"
     },
     "nyc": {
-        "exclude": [
-            "**/*.spec.js"
-        ]
+        "exclude": ["**/*.spec.js"]
     },
     "ava": {
-        "files": [
-            "build/**/*.spec.js"
-        ],
-        "source": [
-            "build/**/*"
-        ]
+        "files": ["build/**/*.spec.js"],
+        "source": ["build/**/*"]
     }
 }

@@ -24,7 +24,7 @@ export class Cli {
 
     header = cmd => `${chalk.green(this.name)} ${cmd} v${this.version}`
 
-    define(name, description, version, ...options) {
+    define(name, description, version, ...options: string[]) {
         this.name = name
         this.version = version
 
@@ -34,7 +34,7 @@ export class Cli {
             }`
         )
 
-        options.forEach(opt => this.P.option(...opt.split('|')))
+        options.forEach(opt => (this.P.option as any)(...opt.split('|')))
         return this
     }
 
