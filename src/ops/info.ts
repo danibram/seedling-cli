@@ -7,15 +7,14 @@ import {
     getGitFolder,
     parseRemoteLS,
     exec,
-    parseToArray
+    parseToArray,
+    seedrcType
 } from '../helpers'
 
 import config from '../config'
 
 export const info = async function(CWD) {
-    let file: { repository: string; tag: string } = await readJSON(
-        path.join(CWD, config.FILE)
-    )
+    let file: seedrcType = await readJSON(path.join(CWD, config.FILE))
 
     let project = getGitFolder(file.repository)
 
@@ -23,6 +22,12 @@ export const info = async function(CWD) {
     console.log(` Name: ${chalk.cyan(project)}`)
     console.log(` Url: ${chalk.cyan(file.repository)}`)
     console.log(` Tag: ${chalk.cyan(file.tag)}`)
+    console.log(` Type: ${file.type ? chalk.cyan(file.type) : ''}`)
+    console.log(
+        ` PackagesJson: ${
+            file.packagesJson ? chalk.cyan(file.packagesJson.join(',')) : ''
+        }`
+    )
     console.log(``)
 
     console.log(`Getting tags of the repository...`)
