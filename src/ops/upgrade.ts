@@ -40,14 +40,18 @@ export const upgrade = async function(CWD) {
         ` Type: ${
             file.type
                 ? chalk.cyan(file.type)
-                : seedfile.type ? seedfile.type : ''
+                : seedfile.type
+                    ? seedfile.type
+                    : ''
         }`
     )
     console.log(
         ` PackagesJson: ${
             file.packagesJson
                 ? chalk.cyan(file.packagesJson.join(','))
-                : seedfile.packagesJson ? seedfile.packagesJson : ''
+                : seedfile.packagesJson
+                    ? seedfile.packagesJson
+                    : ''
         }`
     )
     console.log(``)
@@ -117,14 +121,14 @@ export const upgrade = async function(CWD) {
 
         console.log(`Applying diff on '${path.join(CWD)}'`)
         try {
-            await exec({ cwd: CWD, verbose: true }, ...commands)
+            let output = await exec({ cwd: CWD, verbose: true }, ...commands)
+            await writeFile(path.join(CWD, 'seed.log'), output)
             shell.rm(path.join(gitPath, 'patch.diff'))
         } catch (err) {
             warn(
                 'There are ouputs from git applying, output in the log "seed.log"'
             )
             warn(`Check diff on '${path.join(gitPath, 'patch.diff')}'`)
-            await writeFile(path.join(CWD, 'seed.log'), err.join('\n'))
         }
     }
 
@@ -156,10 +160,10 @@ export const upgrade = async function(CWD) {
                 const newPackage = {
                     ...packageJson,
                     dependencies: newDeps,
-                    ...packageJson.devDependencies &&
+                    ...(packageJson.devDependencies &&
                     packageJsonSeed.devDependencies
                         ? { devDependencies }
-                        : {}
+                        : {})
                 }
 
                 await writeJSON(path.join(CWD, relativePath), newPackage)

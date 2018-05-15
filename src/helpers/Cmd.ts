@@ -29,9 +29,9 @@ export class Cli {
         this.version = version
 
         this.P.version(version).description(
-            `${chalk.green.bold(name)} ${chalk.white.bold(`v${version}`)} ${
-                description
-            }`
+            `${chalk.green.bold(name)} ${chalk.white.bold(
+                `v${version}`
+            )} ${description}`
         )
 
         options.forEach(opt => (this.P.option as any)(...opt.split('|')))

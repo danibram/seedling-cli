@@ -22,6 +22,9 @@ export const exec = (
         child.stdout.on('data', function(chunk) {
             buffer.push(chunk.toString())
         })
+        child.stdout.on('error', function(err) {
+            throw err
+        })
         child.on('close', function(code) {
             code
                 ? reject(buffer.join('') || `Process failed: ${code}`)

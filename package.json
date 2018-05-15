@@ -1,6 +1,6 @@
 {
     "name": "seedling-cli",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "description": "Manage updates and creation using a seed",
     "main": "src/index.js",
     "author": "danibram <info@dbr.io>",
